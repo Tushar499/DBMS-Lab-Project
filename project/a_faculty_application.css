@@ -1,0 +1,91 @@
+.sturecapply-form-list{
+      margin: 10px 0;
+  }
+  .sturecapply-form{
+      display: grid;
+      grid-template-columns: 100%;
+      grid-gap: 0 20px;
+      width: 60%;
+      margin: auto;
+      align-items: center;
+  }
+  .sturecapply-form-list{
+      height: 35px;
+      outline: none;
+      border-radius: 5px;
+      border: 1px solid #b0b0b0;
+      padding: 5px 10px;
+  }
+  .checkbox{
+      width: 100%!important;
+
+  }
+  .sturecapply-form-btn,.recomendition-btn{
+      background-color: #0d6efd;
+      color: white;
+      padding: 12px 25px;
+      border: 0;
+      outline: 0;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: all .3s;
+  }
+  .sturecapply-form-btn{
+      margin-top: 20px;
+      width: 50%;
+      text-align: center;
+      display: inline-block;
+
+  }
+  .recomendition-btn:hover{
+      background-color: #144388;
+  }
+  .sturecapply-form-btn:hover{
+      background-color: #144388;
+  }
+
+  @media screen and (max-width: 768px) {
+      .sturecapply-form{
+          display: grid;
+          grid-template-columns: 100%;
+          grid-gap: 0 20px;
+          width: 80%;
+          margin: auto;
+          align-items: center;
+      }
+      .sturecapply-form-btn{
+          margin-top: 20px;
+      }
+  }
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  .tableask-btn{
+    background-color: #0d6efd;
+    color: white;
+    padding: 12px 25px;
+    border: 0;
+    outline: 0;
+    display: inline-block;
+  }
+  .studentapplybtn{
+    background-color: #0d6efd;
+    color: white;
+    padding: 12px 25px;
+    border: 0;
+    outline: 0;
+    display: inline-block;
+
+  }
