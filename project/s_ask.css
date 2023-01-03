@@ -1,0 +1,32 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  .tableask-btn{
+    background-color: #0d6efd;
+    color: white;
+    padding: 12px 25px;
+    border: 0;
+    outline: 0;
+    display: inline-block;
+  }
+  .studentapplybtn{
+    background-color: #0d6efd;
+    color: white;
+    padding: 12px 25px;
+    border: 0;
+    outline: 0;
+    display: inline-block;
+
+  }
