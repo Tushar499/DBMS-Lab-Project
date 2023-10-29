@@ -22,12 +22,10 @@
            $type = $_POST["type"];
            $email = $_POST["email"];
            $password = $_POST["password"];
-           $_SESSION["n"] = $name;
-           $_SESSION["t"] = $type;
-           //$_SESSION["e"] = $email;
-           $_SESSION["p"] = $password;
-           $_SESSION["femail"] = $email;
+           $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
            $errors = array();
+
            if(empty($type) OR empty($name) OR empty($email) OR empty($password)) {
             array_push($errors,"All fields are required");
            }
@@ -43,7 +41,26 @@
                 echo "<div class='alert alert-danger'>$error</div>";
             }
            }else{
-            header("Location: f_otpverify.php");
+
+            $sql = "INSERT INTO f_users (name, type, email, password) VALUES (?, ?, ?, ?)";
+            $stmt = mysqli_stmt_init($conn);
+            $prepareStmt = mysqli_stmt_prepare($stmt,$sql);
+            if ($prepareStmt) {
+                mysqli_stmt_bind_param($stmt,"ssss",$name, $type, $email, $passwordHash);
+                mysqli_stmt_execute($stmt);
+                $_SESSION["fuser"] = "success";
+                $_SESSION["fname"] = $name;
+                $_SESSION["ftype"] = $type;
+                $_SESSION["femail"] = $email;
+                $_SESSION["fwebsite"] = "";
+                $_SESSION["flinkedin"] = "";
+                $_SESSION["fgithub"] = "";
+                $_SESSION["fimage"] = "";
+                $_SESSION['f_postid'] = "";
+                header("Location:f_home.php");
+            }else{
+                die("Incorrect Information!");
+            }
            }
         }
         ?>

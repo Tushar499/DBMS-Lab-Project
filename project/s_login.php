@@ -13,19 +13,7 @@
     <title>Login Form</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .captcha{
-        width: 50%;
-        background: yellow;
-        text-align: center;
-        font-size: 24px;
-        font-weight: 700;
-        } 
-    </style>
 </head>
-<?php
-$rand = rand(9999,1000);
-?>
 <body>
     <div class="container">
         <?php
@@ -38,7 +26,7 @@ $rand = rand(9999,1000);
             $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
             if ($user) {
                 if (password_verify($password, $user["password"])) {
-                    //session_start();
+                    session_start();
                     $_SESSION["suser"] = "success";
                     $_SESSION["sname"] = $user["name"];
                     $_SESSION["semail"] = $user["email"];
@@ -60,16 +48,7 @@ $rand = rand(9999,1000);
                     $_SESSION['sfsearch'] = "";
                     $_SESSION['sleaderid'] = "";
                     $_SESSION['s_psearch'] = "";
-                    if(isset($_REQUEST['login'])){
-                    $captcha = $_REQUEST['captcha'];
-                    $captcharandom = $_REQUEST['captcha-rand'];
-                    if($captcha!=$captcharandom){
-                        echo "<div class='alert alert-danger'>Invalied Captcha!</div>";
-                    }
-                    else{
-                        header('Location: s_home.php');
-                    }
-                    }
+                    header('Location: s_home.php');
                 }else{
                     echo "<div class='alert alert-danger'>Password does not match</div>";
                 }
@@ -84,13 +63,6 @@ $rand = rand(9999,1000);
         </div>
         <div class="form-group">
             <input type="password" placeholder="Enter Password" name="password" class="form-control">
-        </div>
-        <div class="form-group">
-            <input type="password" name="captcha" id="captcha" placeholder="Enter Captcha" required class="form-control">
-            <input type="hidden" name="captcha-rand" value="<?php echo $rand; ?>">
-        </div>
-        <div class="form-group">
-            <div class="captcha"><?php echo $rand; ?></div>
         </div>
         <div class="form-btn">
             <input type="submit" value="Login" name="login" class="btn btn-primary">

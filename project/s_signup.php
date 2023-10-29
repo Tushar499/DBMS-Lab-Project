@@ -25,13 +25,6 @@
            $cgpa = $_POST["cgpa"];
            $c_credit = $_POST["c_credit"];
            $department = $_POST["department"];
-           $_SESSION["n"] = $name;
-           $_SESSION["sid"] = $studentid;
-           $_SESSION["semail"] = $email;
-           $_SESSION["p"] = $password;
-           $_SESSION["cg"] = $cgpa;
-           $_SESSION["cr"] = $c_credit;
-           $_SESSION["d"] = $department;
            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
            $errors = array();
@@ -54,7 +47,38 @@
                 echo "<div class='alert alert-danger'>$error</div>";
             }
            }else{
-            header("Location: s_otpverify.php");  
+
+            $sql = "INSERT INTO s_users (name, email, studentid, password,cgpa,c_credit,department) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_stmt_init($conn);
+            $prepareStmt = mysqli_stmt_prepare($stmt,$sql);
+            if ($prepareStmt) {
+                mysqli_stmt_bind_param($stmt,"sssssss",$name, $email, $studentid, $passwordHash, $cgpa, $c_credit, $department);
+                mysqli_stmt_execute($stmt);
+                $_SESSION["suser"] = "success";
+                $_SESSION["sname"] = $name;
+                $_SESSION["semail"] = $email;
+                $_SESSION["sstudentid"] = $studentid;
+                $_SESSION["scgpa"] = $cgpa;
+                $_SESSION["sc_credit"] = $c_credit;
+                $_SESSION["sdepartment"] = $department;
+                $_SESSION["sgender"] = "";
+                $_SESSION["swebsite"] = "";
+                $_SESSION["sfacebook"] = "";
+                $_SESSION["sgithub"] = "";
+                $_SESSION["simage"] = "";
+                $_SESSION["slinkedin"] = "";
+                $_SESSION['tmp_sid'] = "";
+                $_SESSION['sp_tmp_courseid'] = "";
+                $_SESSION['sp_tmp_type'] = "";
+                $_SESSION['gsearch'] = "";
+                $_SESSION['gview'] = 0;
+                $_SESSION['sfsearch'] = "";
+                $_SESSION['sleaderid'] = "";
+                $_SESSION['s_psearch'] = "";
+                header("Location:s_home.php");
+            }else{
+                die("Incorrect Information!");
+            }
            }
         }
         ?>
