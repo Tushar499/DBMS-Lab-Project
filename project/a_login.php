@@ -22,6 +22,7 @@ session_start();
              $_SESSION['department'] = "";
              $_SESSION['a_application_department'] = "";
              $_SESSION['a_application_title'] = "";
+             $_SESSION['a_search'] = "";
              header('Location: a_home.php');
            }else{
              echo "<div class='alert alert-danger'>information does not match</div>";

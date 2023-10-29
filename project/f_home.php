@@ -5,6 +5,25 @@
       header('Location: f_login.php');
     }
  ?>
+  <?php
+    include_once('database.php');
+    if(isset($_REQUEST['otp_verify']))
+    {
+    $otp = $_REQUEST['otp'];
+    $select_query = mysqli_query($connection,"select * from otp where otp='$otp' and is_expired!=1 and NOW()<=DATE_ADD(create_at,interval 5 minute)");
+    $count = mysqli_num_rows($select_query);
+    if($count>0)
+    {
+      $select_query = mysqli_query($database, "update otp set is_expired=1 where otp='$otp'");
+      header('location: f_home.php');
+    }
+    else
+    {
+      $msg = "Invalid OTP!";
+    }
+    }
+
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -52,6 +52,7 @@
   <a style="float:right" href="a_home.php">
     <input type="submit" class="searchbtn" value="BACK">
   </a>
+
   <section style="padding-left:800px;padding-top:40px">
     <form class="show" action="a_faculty_application.php" method="post">
       <select style="width:160px;height:30px" name="department" class="form-select form-select mb-3" aria-label=".form-select-lg example">

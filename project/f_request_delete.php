@@ -21,7 +21,7 @@
             if(isset($_POST['delete'])){
               $id = $_POST['id'];
               $aid = $_POST['aid'];
-              $coin = "UPDATE s_application SET aid = 0 WHERE id = '$aid'";
+              $coin = "UPDATE s_application SET aid = 0,associated = 'Pending' WHERE id = '$aid'";
               $coin_run = mysqli_query($conn,$coin);
               $co = "SELECT * FROM s_application WHERE rid = '$id'";
               $co_run = mysqli_query($conn,$co);
