@@ -24,7 +24,6 @@
            $password = $_POST["password"];
            $_SESSION["n"] = $name;
            $_SESSION["t"] = $type;
-           //$_SESSION["e"] = $email;
            $_SESSION["p"] = $password;
            $_SESSION["femail"] = $email;
            $errors = array();
