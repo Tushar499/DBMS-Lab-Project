@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
+    
     <title>Document</title>
 </head>
 <body>
@@ -83,13 +84,26 @@
               echo '<script>alert("At Least TASK TITLE , TOPICS AND INSTRUCTIONS are REQUIRED!!")</script>';
               echo "<script>window.location.href ='f_addtask.php'</script>";
             }else {
-              $sql = "INSERT INTO task(tasktitle,topics,instructions,deadline,assessment,sid,fid) VALUES ('$tasktitle','$topics','$instructions','$deadline','$file','$sid','$fid')";
-              $sql_run = mysqli_query($conn,$sql);
-              move_uploaded_file($_FILES["file"]["tmp_name"], "upload/".$_FILES["file"]["name"]);
-              echo '<script>alert("Task Given Successfully")</script>';
-              echo "<script>window.location.href ='f_taskprofile.php'</script>";
+                  $file_2 = $_FILES['file']; 
+                  $fileType = $file_2['type'];
+                  $fileSize = $file_2['size'];
+          
+                  $allowedTypes = ['image/jpg', 'image/png', 'application/pdf', 'text/x-c++src', 'text/plain', 'text/x-csrc', 'text/x-java', 'text/x-python'];
+                  $maxFileSize = 100 * 1024 * 1024; // 100MB in bytes
+          
+                  if (in_array($fileType, $allowedTypes) && $fileSize <= $maxFileSize) {
+                      $sql = "INSERT INTO task (tasktitle, topics, instructions, deadline, assessment, sid, fid) VALUES ('$tasktitle', '$topics', '$instructions', '$deadline', '$file', '$sid', '$fid')";
+                      $sql_run = mysqli_query($conn, $sql);
+                    
+                      //move_uploaded_file($file['tmp_name'], "upload/" . $file['name']); 
+                      move_uploaded_file($_FILES["file"]["tmp_name"], "upload/".$_FILES["file"]["name"]);
+                      echo '<script>alert("Task Given Successfully")</script>';
+                      echo "<script>window.location.href ='f_taskprofile.php'</script>";
+                  } else {
+                      echo '<script>alert("Invalid file! Please upload a file of allowed type and less than 100MB.")</script>';
+                  }
             }
-          }
+          }  
       ?>
   </div>
 
